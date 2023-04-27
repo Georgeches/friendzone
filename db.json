@@ -1,0 +1,38 @@
+{
+    "videos": [
+      {
+        "video": "https://youtu.be/Gf8JOmrmceU",
+        "user": "George Chesire",
+        "date": "10th september 2022",
+        "likes": 0,
+        "comments":[
+            {
+                "user": "Terrence chebii",
+                "comment": "This is the comment"
+            }
+        ]
+      }
+    ],
+    "pictures": [
+        {
+          "image": "https://youtu.be/Gf8JOmrmceU",
+          "user": "George Chesire",
+          "date": "10th september 2022",
+          "likes": 0,
+          "comments":[
+                {
+                "user": "Yahya Garat",
+                "comment": "This is the comment"
+                }
+            ]
+        }
+    ],
+    "users": [
+        {
+          "name": "George Chesire",
+          "profile_picture": "https://imgs.search.brave.com/bGvmpgkWdt1O0-I-e7NIZ5nKy-rAWcCTfrmvRi6ENrw/rs:fit:437:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5H/bFhxeGNSOUVtdmlO/NWt1d2FVc01RSGFJ/QiZwaWQ9QXBp",
+          "password": "chesire123",
+          "followers":["Terrence chebii", "Yahya Garat"]
+        }
+    ]
+}
