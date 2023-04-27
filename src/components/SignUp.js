@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function SignUp(){
+function SignUp(props){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [profilePic, setProfilePic] = useState('')
@@ -14,15 +14,24 @@ function SignUp(){
             followers: []
         }
 
-        fetch('http://localhost:3000/users',{
-            method:'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newUser)
-        })
-        .then(res=>res.json())
-        .then(newData=>console.log(newData))
+        let isUnique = []
+        props.users.map(user=>user.name===username ? isUnique.unshift('taken') : console.log('unique'))
+
+        if(isUnique.length > 0){
+            alert("username is already taken")
+        }
+        else{
+            fetch('http://localhost:4000/users',{
+                method:'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            })
+            .then(res=>res.json())
+            .then(newData=>console.log(newData))
+            alert('Account has been created successfully')
+        }
     }
 
     return(
