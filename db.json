@@ -1,38 +1,41 @@
 {
-    "videos": [
-      {
-        "video": "https://youtu.be/Gf8JOmrmceU",
-        "user": "George Chesire",
-        "date": "10th september 2022",
-        "likes": 0,
-        "comments":[
-            {
-                "user": "Terrence chebii",
-                "comment": "This is the comment"
-            }
-        ]
-      }
-    ],
-    "pictures": [
+  "videos": [
+    {
+      "id": 1,
+      "video": "https://youtu.be/Gf8JOmrmceU",
+      "user": "George Chesire",
+      "date": "10th september 2022",
+      "likes": 0,
+      "comments": [
         {
-          "image": "https://youtu.be/Gf8JOmrmceU",
-          "user": "George Chesire",
-          "date": "10th september 2022",
-          "likes": 0,
-          "comments":[
-                {
-                "user": "Yahya Garat",
-                "comment": "This is the comment"
-                }
-            ]
+          "user": "Terrence chebii",
+          "comment": "This is the comment"
         }
-    ],
-    "users": [
+      ]
+    }
+  ],
+  "pictures": [
+    {
+      "id": 1,
+      "image": "https://youtu.be/Gf8JOmrmceU",
+      "user": "George Chesire",
+      "date": "10th september 2022",
+      "likes": 0,
+      "comments": [
         {
-          "name": "George Chesire",
-          "profile_picture": "https://imgs.search.brave.com/bGvmpgkWdt1O0-I-e7NIZ5nKy-rAWcCTfrmvRi6ENrw/rs:fit:437:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5H/bFhxeGNSOUVtdmlO/NWt1d2FVc01RSGFJ/QiZwaWQ9QXBp",
-          "password": "chesire123",
-          "followers":["Terrence chebii", "Yahya Garat"]
+          "user": "Yahya Garat",
+          "comment": "This is the comment"
         }
-    ]
+      ]
+    }
+  ],
+  "users": [
+    {
+      "name": "john doe",
+      "password": "nN2xMRBs3YvLsRF",
+      "profile_picture": "data:image/png;base64,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",
+      "followers": [],
+      "id": 1
+    }
+  ]
 }
