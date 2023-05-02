@@ -74,7 +74,7 @@ function PostsSection(){
                 <img key={post.id} src={post.profile_picture} alt={pic.user} />
               )}
               <h4>{pic.user}</h4>
-              <img src={pic.image}/>
+              <img src={pic.image} alt='pic'/>
               <p>{pic.likes} likes</p>
               <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>♥</button>
               <button onClick={() => handleComments(pic)} data-toggle="modal" data-target="#comments-modal">💬</button>
