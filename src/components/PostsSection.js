@@ -24,6 +24,7 @@ function PostsSection(){
     const newComment = { user: username, comment: commentInput }; 
     setComments([...comments, newComment]);
     setCommentInput('');
+    console.log(username);
 
     fetch(`http://localhost:4000/pictures/${currentPic.id}`, {
       method: 'PATCH',
@@ -114,13 +115,12 @@ function PostsSection(){
               </div>
             </section>
         <div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog" role="document">
+            <div className="modal-dialog modal-dialog-scrollable" role="document">
               <div className="modal-content">
                 <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Comments!</h5>
                     <form id="comment-form">
                       <input value={commentInput} onChange={(e) => setCommentInput(e.target.value)} type="text" placeholder="Add Comment ..." />
-                      <button type="button" onClick={() => handleSubmit(pic)}>Add Comment</button>
+                      <button type="button" onClick={() => handleSubmit(pic)}>Send</button>
                     </form>
                                         
                 </div>
