@@ -7,7 +7,15 @@ import NoPage from './components/NoPage';
 import Footer from './components/Footer';
 import Layout from './components/Layout';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from 'react';
 function App() {
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    fetch('http://localhost:4000/users')
+    .then(res => res.json())
+    .then(data => setUsers(data))
+  }, [])
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,7 +32,7 @@ function App() {
             </>
           } />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp users={users} setUsers={setUsers}/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

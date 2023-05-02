@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Outlet, Link } from "react-router-dom";
 
 function SignUp(props){
     const [username, setUsername] = useState('')
@@ -13,7 +14,7 @@ function SignUp(props){
             profile_picture: profilePic,
             followers: []
         }
-
+        console.log(props.users)
         let isUnique = []
         props.users.map(user=>user.name===username ? isUnique.unshift('taken') : console.log('unique'))
 
@@ -30,12 +31,16 @@ function SignUp(props){
             })
             .then(res=>res.json())
             .then(newData=>console.log(newData))
-            alert('Account has been created successfully')
+            props.setUsers([...props.users, newUser])
+            alert('Account has been created successfully. You can now log in')
+            e.target.form.reset()
+            setProfilePic('')
         }
     }
 
     return(
         <div className="signup-form">
+            <h2>Welcome to Friendzone.com</h2>
             <form>
                 <input type="text" placeholder="Enter your username" onChange={e=>setUsername(e.target.value)} />
                 <input type="password" placeholder="Enter your password" onChange={e=>setPassword(e.target.value)} />
@@ -45,6 +50,7 @@ function SignUp(props){
                 <br/>
                 <br/>
                 <button onClick={addNewUser}>Create account</button>
+                <p>Already have an account? <Link style={{color:'#7843E6'}} to="/login">Log in</Link></p>
             </form>
         </div>
     )
