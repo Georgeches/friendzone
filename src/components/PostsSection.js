@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from "react";
+import React, {useState , useEffect} from "react";
 
 function PostsSection(){
     let prefferedHeight = (window.screen.height*0.75).toString()+'px'
@@ -8,15 +8,34 @@ function PostsSection(){
         width: prefferedWidth
     };
     
+    const [currentPic, setCurrentPic] = useState(null);
     const [users , setUsers] = useState([])
     const [videos , setVideos] = useState([])
     const [pics , setPics] = useState([])
     const [likedPosts, setLikedPosts] = useState([])
+    const [commentInput, setCommentInput] = useState('');
     const[comments , setComments] = useState([])
-    console.log(comments);
-
 
     
+  function handleSubmit() {
+    if (!currentPic) return;
+
+    const username = 'w'; 
+    const newComment = { user: username, comment: commentInput }; 
+    setComments([...comments, newComment]);
+    setCommentInput('');
+
+    fetch(`http://localhost:4000/pictures/${currentPic.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comments: currentPic.comments.concat(newComment) }),
+    });
+  }
+    
+    
+   
+    
+
     useEffect(() => {
         fetch('http://localhost:4000/users')
         .then(res => res.json())
@@ -62,8 +81,9 @@ function PostsSection(){
     }
     
     function handleComments(pic) {
+      setCurrentPic(pic);
       setComments(pic.comments);
-    }    
+    }
     
     return (
         <div className="posts" style={mystyle}>
@@ -93,35 +113,36 @@ function PostsSection(){
                 </div>
               </div>
             </section>
-            </>
-          ))}
-
-<div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-            <div className="modal-content">
-            <div className="modal-header">
-                <form>
-                  <input type="text" placeholder="Add Comment ..."/>
-                  <button onClick={(e) => { e.target.form.reset(); e.preventDefault(); }} type="submit">Send</button>
-                </form>
-
-                
-            </div>
-            <div className="modal-body">
-              {comments.map(comment => (
+        <div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Comments!</h5>
+                    <form id="comment-form">
+                      <input value={commentInput} onChange={(e) => setCommentInput(e.target.value)} type="text" placeholder="Add Comment ..." />
+                      <button type="button" onClick={() => handleSubmit(pic)}>Add Comment</button>
+                    </form>
+                                        
+                </div>
+                <div className="modal-body">
+                {comments.map(comment => (
                 <div className="comment">
                 <h5>{comment.user}</h5>
                 <h6>{comment.comment}</h6>
                 </div>
               ))}
-            </div>
 
-            <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
             </div>
-            </div>
-        </div>
-        </div>
+          </div>
+            </>
+          ))}
+
         </div>                
       );
     }
