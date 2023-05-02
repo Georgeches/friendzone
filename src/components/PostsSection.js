@@ -24,6 +24,7 @@ function PostsSection(){
     const newComment = { user: username, comment: commentInput }; 
     setComments([...comments, newComment]);
     setCommentInput('');
+    console.log(username);
 
     fetch(`http://localhost:4000/pictures/${currentPic.id}`, {
       method: 'PATCH',
