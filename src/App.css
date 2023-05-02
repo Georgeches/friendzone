@@ -2,6 +2,23 @@
   --btn-bg-color: #f7d733;
   --section-bg-color: white;
   --btn-hover-bg-color: #ffd500;
+  --info-color: #7843E6;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b5b5b5; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 
 body{
@@ -14,6 +31,7 @@ nav{
   height: 80px;
   align-items: center;
   background-color: var(--section-bg-color);
+  margin-bottom: 10px;
 }
 
 .right{
@@ -32,6 +50,7 @@ nav{
   display: flex;
   justify-content: space-evenly;
   width: 300px;
+  color: black;
 }
 
 .buttons button{
@@ -48,13 +67,15 @@ nav{
   padding-left: 20px;
 }
 
-form{
+.modal form{
   text-align: center;
+  display: flex;
+  width: 100%;
 }
 
-.modal input{
+.modal form input{
   height: 50px;
-  width: 90%;
+  width: 80%;
   border-radius: 10px;
   border: 1px solid rgb(195, 195, 195);
   outline: none;
@@ -62,16 +83,17 @@ form{
   padding-left: 10px;
   font-size: 17px;
   color: rgb(53, 53, 53);
+  margin-right: 5px;
 }
 
 form button{
   height: 50px;
-  width: 80%;
+  width: 20%;
   background-color: var(--btn-bg-color);
   border: none;
   outline: none;
   border-radius: 10px;
-  color: white;
+  color: black;
   cursor: pointer;
 }
 
@@ -91,4 +113,97 @@ main{
 
 .posts{
   background-color: var(--section-bg-color);
+  overflow: scroll;
+  display: grid;
+  place-items: center;
+}
+
+.post{
+  width: 600px;
+  border: 1px solid rgb(228, 228, 228);
+  margin-top: 50px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.post-header{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.user-info{
+  display: flex;
+  align-items: center;
+}
+
+.user-info h5{
+  margin-left: 10px;
+  color: var(--info-color);
+}
+
+.post-header img{
+  border-radius: 100%;
+  height: 70px;
+  width: 70px;
+}
+
+.post-header button{
+  height: 50px;
+  width: 120px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background-color: var(--btn-bg-color);
+}
+
+.post-header button:hover{
+  background-color: var(--btn-hover-bg-color);
+}
+
+.image{
+  min-width: 500px;
+  background-color: rgb(215, 215, 215);
+  filter: brightness(60%);
+  overflow: hidden;
+}
+
+.btns{
+  text-align: left;
+}
+
+.btns button{
+  outline: none;
+  border: none;
+  height: 50px;
+  width: 100px;
+  border-radius: 20px;
+  background-color: var(--btn-bg-color);
+  color: rgb(47, 47, 47);
+  margin: 10px;
+}
+
+.btns i{
+  margin-top: 25px;
+  font-size: 45px;
+}
+
+.other-info{
+  display: flex;
+  justify-content: space-around;
+}
+
+.post-info{
+  text-align: left;
+  margin-top: 10px;
+  color: var(--info-color);
+}
+
+.comment{
+  box-shadow: 1px 1px 5px 1px rgb(184, 184, 184);
+  min-height: 100px;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }

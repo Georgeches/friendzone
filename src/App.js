@@ -1,24 +1,34 @@
 import './App.css';
-import Navbar from './components/NavBar';
 import ProfileSection from './components/ProfileSection';
 import PostsSection from './components/PostsSection';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import NoPage from './components/NoPage';
 import Footer from './components/Footer';
-import React , { useState, useEffect } from 'react';
+import Layout from './components/Layout';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
-  const [users, setUsers] = useState([])
-  const mainstyle={
-    height: (window.screen.height*0.8).toString()+'px'
-  }
-
   return (
-    <div className="App">
-      <Navbar users={users}/>
-      <main style={mainstyle}>
-        <ProfileSection/>
-        <PostsSection/>
-      </main>
-      <Footer/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          <Layout />
+        }>
+          <Route index element={
+            <>
+            <main>
+              <ProfileSection/>
+              <PostsSection/>
+            </main>
+            <Footer />
+            </>
+          } />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
