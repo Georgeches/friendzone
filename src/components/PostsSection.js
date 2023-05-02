@@ -101,7 +101,7 @@ function PostsSection(){
                 <button className="follow-btn">Follow</button>
               </div>
               <div className="image">
-                <img className="img-responsive" height="400" src={pic.image} alt='pic'/>
+                <img className="img-responsive" height="400" src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>
               </div>
               <div className="other-info">
                 <div className="post-info">  
