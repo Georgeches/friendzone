@@ -11,8 +11,10 @@ function PostsSection(){
     const [users , setUsers] = useState([])
     const [videos , setVideos] = useState([])
     const [pics , setPics] = useState([])
-    const [likes , setLikes] = useState()
-    const [likedPosts, setLikedPosts] = useState([]);
+    const [likedPosts, setLikedPosts] = useState([])
+    const[comments , setComments] = useState([])
+    console.log(comments);
+
 
     
     useEffect(() => {
@@ -37,7 +39,8 @@ function PostsSection(){
 
     function handleLikes(pic, likedPosts, setLikedPosts, setPics) {
       if (likedPosts.includes(pic.id)) {
-        return; // User has already liked this post
+        alert('You already Liked')
+        return; 
       }
       
       // Update likedPosts and the likes count for the post
@@ -58,12 +61,14 @@ function PostsSection(){
       })
     }
     
-    
-    
+    function handleComments(pic) {
+      setComments(pic.comments);
+    }    
     
     return (
         <div className="posts" style={mystyle}>
           {pics.map((pic) => (
+            <>
             <section key={pic.id}>
               {users.filter(user=>pic.user===user.name).map(post=>
                 <img key={post.id} src={post.profile_picture} alt={pic.user} />
@@ -72,8 +77,9 @@ function PostsSection(){
               <img src={pic.image}/>
               <p>{pic.likes} likes</p>
               <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>♥</button>
-                    <button data-toggle="modal" data-target="#comments-modal">💬</button>
+              <button onClick={() => handleComments(pic)} data-toggle="modal" data-target="#comments-modal">💬</button>
             </section>
+            </>
           ))}
 
 <div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -81,10 +87,22 @@ function PostsSection(){
             <div className="modal-content">
             <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">Comments!</h5>
+                <form>
+                  <input type="text" placeholder="Add Comment ..."/>
+                  <input onClick={(e) => { e.target.form.reset(); e.preventDefault(); }} type="submit"/>
+                </form>
+
                 
             </div>
             <div className="modal-body">
+              {comments.map(comment => (
+                <>
+                <h6>{comment.user}</h6>
+                <h4>{comment.comment}</h4>
+                </>
+              ))}
             </div>
+
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
