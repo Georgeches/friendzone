@@ -10,11 +10,6 @@ function App() {
     height: (window.screen.height*0.8).toString()+'px'
   }
 
-  useEffect(()=>{
-    fetch('http://localhost:4000/users')
-    .then(res=>res.json())
-    .then(data=>setUsers(data))
-  },[])
   return (
     <div className="App">
       <Navbar users={users}/>
