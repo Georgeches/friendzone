@@ -91,17 +91,23 @@ function PostsSection(){
           {pics.map((pic) => (
             <>
             <section className="post" key={pic.id}>
+              <hr/>
               <div className="post-header">
                 <div className="user-info">
                   {users.filter(user=>pic.user===user.name).map(post=>
+                  <div className="profile-pic">
                     <img key={post.id} src={post.profile_picture} alt={pic.user} />
+                  </div>
                   )}
+                  <div id="pic-extra-info">
                   <h5>{pic.user}</h5>
+                  <p>{pic.date}</p>
+                  </div>
                 </div>
                 <button className="follow-btn">Follow</button>
               </div>
               <div className="image">
-                <img className="img-responsive" height="400" src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>
+                <img className="img-responsive" height="300" src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>
               </div>
               <div className="other-info">
                 <div className="post-info">  
