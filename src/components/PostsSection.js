@@ -89,17 +89,30 @@ function PostsSection(){
         <div className="posts" style={mystyle}>
           {pics.map((pic) => (
             <>
-            <section key={pic.id}>
-              {users.filter(user=>pic.user===user.name).map(post=>
-                <img key={post.id} src={post.profile_picture} alt={pic.user} />
-              )}
-              <h4>{pic.user}</h4>
-              <img src={pic.image} alt='pic'/>
-              <p>{pic.likes} likes</p>
-              <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>♥</button>
-              <button onClick={() => handleComments(pic)} data-toggle="modal" data-target="#comments-modal">💬</button>
+            <section className="post" key={pic.id}>
+              <div className="post-header">
+                <div className="user-info">
+                  {users.filter(user=>pic.user===user.name).map(post=>
+                    <img key={post.id} src={post.profile_picture} alt={pic.user} />
+                  )}
+                  <h5>{pic.user}</h5>
+                </div>
+                <button className="follow-btn">Follow</button>
+              </div>
+              <div className="image">
+                <img className="img-responsive" height="400" src={pic.image} alt='pic'/>
+              </div>
+              <div className="other-info">
+                <div className="post-info">  
+                  <p>{pic.likes} likes</p>
+                  <p>{pic.comments.length} comments</p>
+                </div>
+                <div className="btns">
+                  <button onClick={() => handleComments(pic)} data-toggle="modal" data-target="#comments-modal" className="comment-btn">Comment</button>
+                  <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>Like</button>
+                </div>
+              </div>
             </section>
-
         <div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
@@ -113,11 +126,11 @@ function PostsSection(){
                 </div>
                 <div className="modal-body">
                 {comments.map(comment => (
-                  <>
-                    <h6>{comment.username}</h6>
-                    <h4>{comment.comment}</h4>
-                  </>
-))}
+                <div className="comment">
+                <h5>{comment.user}</h5>
+                <h6>{comment.comment}</h6>
+                </div>
+              ))}
 
                 </div>
 
