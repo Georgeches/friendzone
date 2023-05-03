@@ -32,7 +32,7 @@ function App() {
     .then(data => setPics(data))
   }, [])
 
-  const filteredPics = pics.filter(pic=>pic.user.toLowerCase().search(search)>-1)
+  const filteredPics = pics.filter(pic=>pic.user.toLowerCase().search(search.toLocaleLowerCase())>-1)
 
   return (
     <BrowserRouter>
