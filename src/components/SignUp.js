@@ -41,6 +41,7 @@ function SignUp(props){
     return(
         <div className="signup-form">
             <h2>Welcome to Friendzone.com</h2>
+            <div className="auth-form-container">
             <form>
                 <input type="text" placeholder="Enter your username" onChange={e=>setUsername(e.target.value)} />
                 <input type="password" placeholder="Enter your password" onChange={e=>setPassword(e.target.value)} />
@@ -52,6 +53,7 @@ function SignUp(props){
                 <button onClick={addNewUser}>Create account</button>
                 <p>Already have an account? <Link style={{color:'#7843E6'}} to="/login">Log in</Link></p>
             </form>
+            </div>
         </div>
     )
 }

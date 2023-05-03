@@ -1,6 +1,4 @@
-import App from "../App";
-
-function ProfileSection(){
+function ProfileSection({currentUser}){
     let prefferedHeight = (window.screen.height*0.75).toString()+'px'
     let prefferedWidth = (window.screen.width*0.3).toString()+'px'
     
