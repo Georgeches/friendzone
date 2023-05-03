@@ -15,7 +15,7 @@ function Login({users, currentUser, setCurrentUser}) {
                     foundUsers.unshift('found')
                     alert('Successfully logged in')
                     e.target.form.reset()
-                }create filter functionality
+                }
             }
             
             if(foundUsers.length===0){
