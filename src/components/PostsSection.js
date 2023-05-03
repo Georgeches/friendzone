@@ -1,17 +1,14 @@
 import React, {useState , useEffect} from "react";
 
-function PostsSection(){
+function PostsSection({currentUser, users, pics, setPics}){
     let prefferedHeight = (window.screen.height*0.75).toString()+'px'
-    let prefferedWidth = (window.screen.width*0.6).toString()+'px'
+    let prefferedWidth = (window.screen.width*0.5).toString()+'px'
     const mystyle = {
         height: prefferedHeight,
         width: prefferedWidth
     };
     
     const [currentPic, setCurrentPic] = useState(null);
-    const [users , setUsers] = useState([])
-    const [videos , setVideos] = useState([])
-    const [pics , setPics] = useState([])
     const [likedPosts, setLikedPosts] = useState([])
     const [commentInput, setCommentInput] = useState('');
     const[comments , setComments] = useState([])
@@ -32,29 +29,6 @@ function PostsSection(){
       body: JSON.stringify({ comments: currentPic.comments.concat(newComment) }),
     });
   }
-    
-    
-   
-    
-
-    useEffect(() => {
-        fetch('http://localhost:4000/users')
-        .then(res => res.json())
-        .then(data => setUsers(data))
-        
-    }, [])
-
-      useEffect(() => {
-      fetch('http://localhost:4000/videos')
-      .then(res => res.json())
-      .then(data => setVideos(data))
-    }, [])
-
-    useEffect(() => {
-      fetch('http://localhost:4000/pictures')
-      .then(res => res.json())
-      .then(data => setPics(data))
-    }, [])
 
 
     function handleLikes(pic, likedPosts, setLikedPosts, setPics) {
@@ -91,7 +65,7 @@ function PostsSection(){
           {pics.map((pic) => (
             <>
             <section className="post" key={pic.id}>
-              <hr/>
+              
               <div className="post-header">
                 <div className="user-info">
                   {users.filter(user=>pic.user===user.name).map(post=>
@@ -119,6 +93,7 @@ function PostsSection(){
                   <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>Like</button>
                 </div>
               </div>
+              <hr/>
             </section>
         <div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-scrollable" role="document">
