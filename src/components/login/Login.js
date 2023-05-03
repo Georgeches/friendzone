@@ -1,9 +1,8 @@
-import './login/login.css';
-
+import './login.css';
 
 function Login() {
   return (
-    
+    <div className="App">
       <div className="auth-form-container">
         <form className="login-form">
           <h1>Log in</h1>
@@ -18,7 +17,7 @@ function Login() {
           <button type="submit">Log in</button>
         </form>
       </div>
- 
+    </div>
   );
 }
 
