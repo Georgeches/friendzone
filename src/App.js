@@ -10,6 +10,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from 'react';
 function App() {
   const [users, setUsers] = useState([])
+  const [currentUser, setLoginUser] = useState({})
+  console.log(currentUser)
   useEffect(() => {
     fetch('http://localhost:4000/users')
     .then(res => res.json())
@@ -31,7 +33,7 @@ function App() {
             <Footer />
             </>
           } />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login users={users} loginUser={currentUser} setLoginUser={setLoginUser}/>} />
           <Route path="/signup" element={<SignUp users={users} setUsers={setUsers}/>} />
           <Route path="*" element={<NoPage />} />
         </Route>

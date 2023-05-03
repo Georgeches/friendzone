@@ -1,16 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #fff;
-}
-
 .auth-form-container {
+  font-family: 'Montserrat', sans-serif;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
+  margin-top: 10px;
 }
 
 .login-form {
@@ -18,13 +15,13 @@ body {
   flex-direction: column;
 }
 
-.login-form h1 {
+.login-form h1, h2 {
   text-align: center;
   font-size: 2.5rem;
   color: #7843E6;
 }
 
-.form-group {
+.form-group, .signup-form input {
   margin: 1rem 0;
 }
 
@@ -35,8 +32,8 @@ label {
   color: #333;
 }
 
-input[type="text"],
-input[type="password"] {
+.auth-form-container input[type="text"],
+.auth-form-container input[type="password"] {
   width: 100%;
   padding: 0.5rem;
   font-size: 1.2rem;

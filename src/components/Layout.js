@@ -13,15 +13,12 @@ function Layout(){
             </div>
         
         <div className="buttons">
-            <button type="button" className="btn">
-            <Link style={{color:'#7843E6'}} to="/">Home</Link>
-            </button>
-            <button type="button" className="btn">
-            <Link style={{color:'#7843E6'}} to="/login">Log in</Link>
-            </button>
-            <button type="button" className="btn">
-            <Link style={{color:'#7843E6'}} to="/signup">Sign up</Link>
-            </button>
+            <Link style={{color:'rgb(47, 47, 47)', fontSize:'18px'}} to="/">Home</Link>
+         
+            <Link style={{color:'rgb(47, 47, 47)', fontSize:'18px'}} to="/login">Log in</Link>
+    
+            <Link style={{color:'rgb(47, 47, 47)', fontSize:'18px'}} to="/signup">Sign up</Link>
+   
         </div>
         </nav>
         <Outlet />

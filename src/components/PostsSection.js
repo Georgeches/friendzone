@@ -2,7 +2,7 @@ import React, {useState , useEffect} from "react";
 
 function PostsSection(){
     let prefferedHeight = (window.screen.height*0.75).toString()+'px'
-    let prefferedWidth = (window.screen.width*0.6).toString()+'px'
+    let prefferedWidth = (window.screen.width*0.5).toString()+'px'
     const mystyle = {
         height: prefferedHeight,
         width: prefferedWidth
@@ -91,7 +91,7 @@ function PostsSection(){
           {pics.map((pic) => (
             <>
             <section className="post" key={pic.id}>
-              <hr/>
+              
               <div className="post-header">
                 <div className="user-info">
                   {users.filter(user=>pic.user===user.name).map(post=>
@@ -119,6 +119,7 @@ function PostsSection(){
                   <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>Like</button>
                 </div>
               </div>
+              <hr/>
             </section>
         <div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-scrollable" role="document">
@@ -133,8 +134,8 @@ function PostsSection(){
                 <div className="modal-body">
                 {comments.map(comment => (
                 <div className="comment">
-                <h5>{comment.user}</h5>
-                <h6>{comment.comment}</h6>
+                <h6>{comment.user}</h6>
+                <h7>{comment.comment}</h7>
                 </div>
               ))}
 

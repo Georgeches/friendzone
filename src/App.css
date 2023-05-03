@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
 :root {
-  --btn-bg-color: #f7d733;
+  --btn-hover-bg-color: #f7d733;
   --section-bg-color: white;
-  --btn-hover-bg-color: #ffd500;
+  --btn-bg-color: #ffd500;
   --info-color: #7843E6;
 }
 
@@ -98,29 +98,6 @@ nav{
 
 .signup-form h2{
   margin-top: 15px;
-}
-
-.signup-form form{
-  margin-top: 15px;
-  border: 1px solid rgb(183, 183, 183);
-  width: 600px;
-  height: 500px;
-  display: grid;
-  place-content: center;
-}
-
-.signup-form form input{
-  display: block;
-  height: 60px;
-  width: 500px;
-  border-radius: 10px;
-  border: 1px solid rgb(195, 195, 195);
-  outline: none;
-  margin-top: 10px;
-  padding-left: 10px;
-  font-size: 17px;
-  color: rgb(53, 53, 53);
-  font-size: 17px;
 }
 
 .signup-form button{
@@ -265,6 +242,11 @@ main{
   min-height: 100px;
   padding-top: 20px;
   padding-left: 30px;
+  padding-right: 20px;
   padding-bottom: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.comment h6{
+  font-weight: 600;
 }
