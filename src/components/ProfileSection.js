@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-function ProfileSection({currentUser , comments , setComments}) {
+function ProfileSection({filteredPics,currentUser , comments , setComments, allPics, setAllPics}) {
   let preferredHeight = (window.screen.height*0.75).toString()+'px';
   let preferredWidth = (window.screen.width*0.3).toString()+'px';
+  
+  let fullWidth = {
+    width: '90%'
+  } 
 
   const mystyle = {
     height: preferredHeight,
@@ -10,26 +14,21 @@ function ProfileSection({currentUser , comments , setComments}) {
   };
 
   const [postInput, setPostInput] = useState('');
-  const[pics , setPics] = useState([])
+  const[pics , setPics] = useState(filteredPics)
   const[myPics , setMyPics] = useState([])
   const[deletedPics , setDeletedPics] = useState([])
 
-  useEffect(() => {
-    fetch('http://localhost:4000/pictures')
-      .then(res => res.json())
-      .then(data => {setPics(data);
-        const filteredPics = data.filter(pic => pic.user === currentUser.name);
-        setMyPics(filteredPics);
-      });
-  }, [currentUser.name]);
-
-
-  function handlePost(event){
-    event.preventDefault(); 
+  function handlePost(e){
+    e.preventDefault(); 
     let postInput = document.getElementById("postInput").value;
-    let currentDate = new Date().toISOString();
-    
-    console.log("debug");
+    let months = ['January', 'February','March','April','May','June','July','August','September','November','December']
+    let dateNow = new Date()
+    let day = dateNow.getDay()
+    let year = dateNow.getFullYear()
+    let month = months[dateNow.getMonth()]
+    let currentDate = `${day}th ${month} ${year}`
+    console.log(currentDate)
+
 
     let newPost = {
       image: postInput,
@@ -46,6 +45,10 @@ function ProfileSection({currentUser , comments , setComments}) {
       headers: { 'Content-Type': 'application/json' },
       body : JSON.stringify(newPost)
     });
+    setAllPics([...allPics, newPost])
+    setMyPics([...myPics, newPost])
+    alert('Posted')
+    setPostInput('')
   }
 
   function handleComments(mypic) {
@@ -61,6 +64,7 @@ function ProfileSection({currentUser , comments , setComments}) {
     let DeletedPics = myPics.filter(mypic => mypic.id !== id)
     setDeletedPics(DeletedPics);
     setMyPics(DeletedPics);
+    setAllPics(allPics.filter(pic=>pic.id!==id))
   }
   
   
@@ -74,23 +78,32 @@ function ProfileSection({currentUser , comments , setComments}) {
     :
     <>
       <div className="profile" style={mystyle}>
-        <img src={currentUser.profile_picture} alt="Profile Picture" />
+        <div style={fullWidth}>
+        <img className="prof-pic" src={currentUser.profile_picture} alt="Profile Picture" />
+        </div>
         <h3>{currentUser.name}</h3>
-        <h5 id="purple">Followers: {currentUser.followers.length}</h5>
-        <form onSubmit={handlePost}>
-            <input type="text" id="postInput" placeholder="Add New Post..." value={postInput} onChange={(event) => setPostInput(event.target.value)} />
+        <h5 id="purple" style={fullWidth}>Followers: {currentUser.followers.length}</h5>
+       
+        <form onSubmit={handlePost} style={fullWidth}>
+            <input type="text" id="postInput" placeholder="Add New Post..." value={postInput} onChange={(event) => setPostInput(event.target.value)} required/>
             <button type="submit">Post</button>
         </form>
-
-        <h4>My Posts</h4>
-        {myPics.map( mypic => (
+        <h4 className="prof-posts-header" style={fullWidth}>Your Posts</h4>
+        {filteredPics.map( mypic => (
             <>
-            <div key={mypic.id}>
+            <div className="profile-post" key={mypic.id}>
               <img src={mypic.image}/>
-              <p>{mypic.likes} likes</p>
-              <p>{mypic.comments.length} comments</p>
-              <button onClick={() => handleComments(mypic)} data-toggle="modal" data-target="#mycomments-modal" className="comment-btn">Comment</button>
-              <button onClick={() => handleDelete(mypic.id)}>Delete Post</button>
+              <div className="info">
+                <div>
+                  <p>{mypic.likes} likes</p>
+                  <p>{mypic.comments.length} comments</p>
+                </div>
+                <div className="info-btns">
+                  <button onClick={() => handleComments(mypic)} data-toggle="modal" data-target="#mycomments-modal" className="comment-btn">Comments</button>
+                  <button onClick={() => handleDelete(mypic.id)}>Delete Post</button>
+                </div>
+              </div>
+              <hr/>
               <div className="modal fade" id="mycomments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div className="modal-dialog modal-dialog-scrollable" role="document">
                 <div className="modal-content">

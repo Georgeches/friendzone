@@ -33,7 +33,8 @@ function App() {
   }, [])
 
   const filteredPics = pics.filter(pic=>pic.user.toLowerCase().search(search.toLocaleLowerCase())>-1)
-
+  const userFilteredPics = pics.filter(pic => pic.user === currentUser.name);
+  console.log(userFilteredPics);
   return (
     <BrowserRouter>
       <Routes>
@@ -43,7 +44,7 @@ function App() {
           <Route index element={
             <>
             <main>
-              <ProfileSection currentUser={currentUser} users={users} pics={pics} setPics={setPics} comments={comments} setComments={setComments}/>
+              <ProfileSection currentUser={currentUser} users={users} allPics={pics} setAllPics={setPics} comments={comments} setComments={setComments} filteredPics={userFilteredPics}/>
               <PostsSection currentUser={currentUser} users={users} pics={filteredPics} setPics={setPics} comments={comments} setComments={setComments}/>
             </main>
             <Footer />
