@@ -12,7 +12,8 @@ function ProfileSection({currentUser , comments , setComments}) {
   const [postInput, setPostInput] = useState('');
   const[pics , setPics] = useState([])
   const[myPics , setMyPics] = useState([])
- 
+  const[deletedPics , setDeletedPics] = useState([])
+
   useEffect(() => {
     fetch('http://localhost:4000/pictures')
       .then(res => res.json())
@@ -51,6 +52,20 @@ function ProfileSection({currentUser , comments , setComments}) {
     setComments(mypic.comments);
   }
 
+  function handleDelete(id){
+    fetch(`http://localhost:4000/pictures/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-type': 'application/json' },
+    });
+  
+    let DeletedPics = myPics.filter(mypic => mypic.id !== id)
+    setDeletedPics(DeletedPics);
+    setMyPics(DeletedPics);
+  }
+  
+  
+  
+
   return (
     currentUser.name === undefined ? 
       <div className="profile">
@@ -70,28 +85,31 @@ function ProfileSection({currentUser , comments , setComments}) {
         <h4>My Posts</h4>
         {myPics.map( mypic => (
             <>
-            <img src={mypic.image}/>
-            <p>{mypic.likes} likes</p>
-            <p>{mypic.comments.length} comments</p>
-            <button onClick={() => handleComments(mypic)} data-toggle="modal" data-target="#comments-modal" className="comment-btn">Comment</button>
-            <div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-scrollable" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                <h4>People's Comments</h4>
-                </div>
-                <div className="modal-body">
-                {comments.map(comment => (
-                <div className="comment">
-                <h5>{comment.user}</h5>
-                <h6>{comment.comment}</h6>
-                </div>
-              ))}
+            <div key={mypic.id}>
+              <img src={mypic.image}/>
+              <p>{mypic.likes} likes</p>
+              <p>{mypic.comments.length} comments</p>
+              <button onClick={() => handleComments(mypic)} data-toggle="modal" data-target="#mycomments-modal" className="comment-btn">Comment</button>
+              <button onClick={() => handleDelete(mypic.id)}>Delete Post</button>
+              <div className="modal fade" id="mycomments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog modal-dialog-scrollable" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                  <h4>People's Comments</h4>
+                  </div>
+                  <div className="modal-body">
+                  {comments.map(comment => (
+                  <div className="comment">
+                  <h5>{comment.user}</h5>
+                  <h6>{comment.comment}</h6>
+                  </div>
+                ))}
 
-                </div>
+                  </div>
 
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
             </div>

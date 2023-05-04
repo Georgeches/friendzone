@@ -16,7 +16,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
   function handleSubmit() {
     if (!currentPic) return;
 
-    const username = 'w'; 
+    const username = currentUser.name; 
     const newComment = { user: username, comment: commentInput }; 
     setComments([...comments, newComment]);
     setCommentInput('');
