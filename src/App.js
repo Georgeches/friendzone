@@ -16,8 +16,6 @@ function App() {
   const [search, setSearch] = useState('')
   const[comments , setComments] = useState([])
 
-  // console.log(currentUser)
-
   useEffect(() => {
     fetch('http://localhost:4000/users')
     .then(res => res.json())
