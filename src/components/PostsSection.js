@@ -56,17 +56,19 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
 
     function handleFollow(pic) {
       const userId = users.find(user => user.name === pic.user)?.id;
+      const selectedProfile = users.find(user => user.name === pic.user)
       if (!userId) return;
     
       const alreadyFollowing = pic.user === currentUser.name;
       if (alreadyFollowing) return;
     
-      const newFollower = { user: currentUser.name };
+      const newFollowername = { user: currentUser.name };
+      const newFollower = [...selectedProfile.followers , newFollowername]
     
       fetch(`http://localhost:4000/users/${userId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ followers: [newFollower] }),
+        body: JSON.stringify({ followers: newFollower }),
       })
         .then((response) => response.json())
         .then((data) => {console.log(data);
