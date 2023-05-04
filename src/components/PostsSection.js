@@ -1,6 +1,6 @@
 import React, {useState , useEffect} from "react";
 
-function PostsSection({currentUser, users, pics, setPics}){
+function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}){
     let prefferedHeight = (window.screen.height*0.75).toString()+'px'
     let prefferedWidth = (window.screen.width*0.5).toString()+'px'
     const mystyle = {
@@ -11,13 +11,12 @@ function PostsSection({currentUser, users, pics, setPics}){
     const [currentPic, setCurrentPic] = useState(null);
     const [likedPosts, setLikedPosts] = useState([])
     const [commentInput, setCommentInput] = useState('');
-    const[comments , setComments] = useState([])
 
     
   function handleSubmit() {
     if (!currentPic) return;
 
-    const username = 'w'; 
+    const username = currentUser.name; 
     const newComment = { user: username, comment: commentInput }; 
     setComments([...comments, newComment]);
     setCommentInput('');

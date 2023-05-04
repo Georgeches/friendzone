@@ -14,6 +14,7 @@ function App() {
   const [pics , setPics] = useState([])
   const [videos , setVideos] = useState([])
   const [search, setSearch] = useState('')
+  const[comments , setComments] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:4000/users')
@@ -42,8 +43,8 @@ function App() {
           <Route index element={
             <>
             <main>
-              <ProfileSection currentUser={currentUser} users={users} pics={pics} setPics={setPics}/>
-              <PostsSection currentUser={currentUser} users={users} pics={filteredPics} setPics={setPics}/>
+              <ProfileSection currentUser={currentUser} users={users} pics={pics} setPics={setPics} comments={comments} setComments={setComments}/>
+              <PostsSection currentUser={currentUser} users={users} pics={filteredPics} setPics={setPics} comments={comments} setComments={setComments}/>
             </main>
             <Footer />
             </>
