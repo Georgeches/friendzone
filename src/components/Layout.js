@@ -9,7 +9,9 @@ function Layout({currentUser, setCurrentUser, search, setSearch}){
 
     function handleLogOut(){
         let userConfirm = window.confirm('Are you sure you want to log out')
-        userConfirm===true ? setCurrentUser({}) : console.log(currentUser.name)
+        if(userConfirm===true){
+            setCurrentUser({})
+        }
     }
     return (
         <>
@@ -17,7 +19,7 @@ function Layout({currentUser, setCurrentUser, search, setSearch}){
             <div className="right">
                <img src={Logo} alt="logo" height="80" />
                 <form>
-                    <input type="text" id="filter" placeholder="Type to search..." onChange={e=>setSearch(e.target.value)} />
+                    <input type="text" id="filter" placeholder="Type to search..." onChange={e=>setSearch(e.target.value.replace(/\\/g, ''))} />
                 </form>
             </div>
         

@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { Outlet, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUp(props){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [profilePic, setProfilePic] = useState('')
+    const nav = useNavigate()
 
     function addNewUser(e){
         e.preventDefault()
@@ -35,6 +36,7 @@ function SignUp(props){
             alert('Account has been created successfully. You can now log in')
             e.target.form.reset()
             setProfilePic('')
+            nav('/login')
         }
     }
 

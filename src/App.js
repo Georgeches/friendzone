@@ -14,7 +14,6 @@ function App() {
   const [pics , setPics] = useState([])
   const [videos , setVideos] = useState([])
   const [search, setSearch] = useState('')
-  console.log(currentUser)
 
   useEffect(() => {
     fetch('http://localhost:4000/users')

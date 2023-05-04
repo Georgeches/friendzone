@@ -1,8 +1,10 @@
 import './login.css';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 function Login({users, currentUser, setCurrentUser}) {
     const [username, setName] = useState('')
     const [password, setPassword] = useState('')
+    const nav = useNavigate()
 
     function handleLogin(e){
         e.preventDefault()
@@ -15,6 +17,7 @@ function Login({users, currentUser, setCurrentUser}) {
                     foundUsers.unshift('found')
                     alert('Successfully logged in')
                     e.target.form.reset()
+                    nav('/')
                 }
             }
             
@@ -25,9 +28,9 @@ function Login({users, currentUser, setCurrentUser}) {
         else{
             alert('You are already logged in as ' + currentUser.name)
         }
-
+        
     }
-
+  
   return (
       <div className="auth-form-container">
         <form className="login-form">
