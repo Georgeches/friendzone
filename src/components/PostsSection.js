@@ -53,6 +53,30 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
         body : JSON.stringify({ likes: pic.likes + 1 })
       })
     }
+
+    function handleFollow(pic) {
+      const userId = users.find(user => user.name === pic.user)?.id;
+      if (!userId) return;
+    
+      const alreadyFollowing = pic.user === currentUser.name;
+      if (alreadyFollowing) return;
+    
+      const newFollower = { user: currentUser.name };
+    
+      fetch(`http://localhost:4000/users/${userId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ followers: [newFollower] }),
+      })
+        .then((response) => response.json())
+        .then((data) => {console.log(data);
+        })
+        .catch((error) => console.error(error));
+    }
+    
+    
+    
+    
     
     function handleComments(pic) {
       setCurrentPic(pic);
@@ -77,7 +101,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                   <p>{pic.date}</p>
                   </div>
                 </div>
-                <button className="follow-btn">Follow</button>
+                <button className="follow-btn" onClick={() => handleFollow(pic)}>Follow</button>
               </div>
               <div className="image">
                 <img className="img-responsive" height="300" src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>
