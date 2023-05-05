@@ -21,7 +21,6 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
 
   function handlePost(e){
     e.preventDefault(); 
-    let postInput = document.getElementById("postInput").value;
     let months = ['January', 'February','March','April','May','June','July','August','September','November','December']
     let dateNow = new Date()
     let day = dateNow.getDay()
@@ -90,13 +89,26 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     <>
       <div className="profile" style={mystyle}>
         <div style={fullWidth}>
-        <img className="prof-pic" src={currentUser.profile_picture} alt="Profile Picture" />
+        <img className="prof-pic" src={currentUser.profile_picture} alt="ProfPicture" />
         </div>
         <h3>{currentUser.name}</h3>
         <h5 id="purple" style={fullWidth}>Followers: {currentUser.followers.length}</h5>
        
-        <form onSubmit={handlePost} style={fullWidth}>
-            <input type="text" id="postInput" placeholder="Add New Post..." value={postInput} onChange={(event) => setPostInput(event.target.value)} required/>
+        <form onSubmit={handlePost} style={{width: '90%', display: 'flex', justifyContent:'start', marginTop:'20px'}}>
+                <input name="postInput" id="postInput" type="file" class="form-control-file" onChange={e=>{
+                    let value = URL.createObjectURL(e.target.files[0]);
+                    setPostInput(value)
+                    console.log(value)
+                    }} style={{
+                      border:'1px solid rgb(185, 185, 185)',
+                      outline: 'none', 
+                      borderRadius:'10px', 
+                      height:'50px', 
+                      width: '250px',
+                      paddingTop: '9px',
+                      paddingLeft: '10px',
+                      marginLeft: '10px'
+                    }}/>
             <button type="submit">Post</button>
         </form>
         <h4 className="prof-posts-header" style={fullWidth}>Your Posts</h4>
