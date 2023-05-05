@@ -84,8 +84,6 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     setAllPics(allPics.filter(pic=>pic.id!==id))
   }
   
-  console.log(currentUser)
-  
 
   return (
     currentUser.name === undefined ? 
@@ -95,8 +93,10 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     :
     <>
       <div className="profile" style={mystyle}>
-        <div style={fullWidth}>
+        <div className="prof-img" style={{width:'100%'}}>
+        <div className="prof-pic-div">
         <img className="prof-pic" src={currentUser.profile_picture} alt="ProfPicture" />
+        </div> 
         </div>
         <h3>{currentUser.name}</h3>
         <h5 id="purple" style={fullWidth}>Followers: {currentUser.followers.length}</h5>
