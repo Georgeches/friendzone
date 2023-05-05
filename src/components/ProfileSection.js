@@ -21,7 +21,7 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
 
   filteredPics.sort(function(a, b){return a.id - b.id});
   filteredPics.reverse()
-  console.log(filteredPics)
+  console.log(filteredPics.length)
 
   function handlePost(e){
     e.preventDefault(); 
@@ -33,10 +33,7 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     let currentDate = `${day}th ${month} ${year}`
     console.log(currentDate)
 
-    let x = 1
-    for(let i of filteredPics){
-      x++
-    }
+    let x = allPics.length + 1
 
     let newPost = {
       image: postInput,
@@ -87,7 +84,7 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     setAllPics(allPics.filter(pic=>pic.id!==id))
   }
   
-  
+  console.log(currentUser)
   
 
   return (
@@ -125,7 +122,7 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
         {filteredPics.map( mypic => (
             <>
             <div className="profile-post" key={mypic.id}>
-              <img src={mypic.image}/>
+              <img src={mypic.image} alt="post"/>
               <div className="info">
                 <div>
                   <p>{mypic.likes} likes</p>

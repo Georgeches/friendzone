@@ -1,7 +1,7 @@
 import React, {useState , useEffect} from "react";
 import axios from "axios";
 
-function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}){
+function PostsSection({setCurrentUser, currentUser, users, pics, setPics ,comments ,setComments}){
     let prefferedHeight = (window.screen.height*0.75).toString()+'px'
     let prefferedWidth = (window.screen.width*0.5).toString()+'px'
     const mystyle = {
@@ -13,6 +13,9 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
     const [likedPosts, setLikedPosts] = useState([])
     const [commentInput, setCommentInput] = useState('');
     const [likeOrUnlike, setLike] = useState('Like')
+    pics.sort(function(a, b){return a.id - b.id});
+    pics.reverse()
+    console.log(pics)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -96,7 +99,6 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
         .catch(function (error) {
           console.log(error);
         });
-        setLike('Unlike')
       }
     }
 
@@ -136,14 +138,11 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
       }
     }
     
-    
-    
-    
-    
     function handleComments(e, pic) {
       e.preventDefault()
       setCurrentPic(pic);
       setComments(pic.comments);
+      console.log(pic.comments)
     }
     
     return (
@@ -195,7 +194,11 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                 </div>
                 <div className="btns">
                   <button onClick={(e) => handleComments(e, pic)} data-toggle="modal" data-target="#comments-modal" className="comment-btn">Comment</button>
-                  <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>{likeOrUnlike}</button>
+                  {likedPosts.includes(pic.id)?
+                    <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>Unlike</button>
+                    :
+                    <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>Like</button>
+                  }  
                 </div>
               </div>
               <hr/>

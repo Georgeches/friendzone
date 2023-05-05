@@ -15,7 +15,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({})
   const [pics , setPics] = useState([])
   const [search, setSearch] = useState('')
-  const[comments , setComments] = useState([])
+  const [comments , setComments] = useState([])
 
   useEffect(() => {
     axios.get('https://my-json-server.typicode.com/Georgeches/friendzone/users')
@@ -42,8 +42,6 @@ function App() {
   const filteredPics = pics.filter(pic=>pic.user.toLowerCase().search(search.toLocaleLowerCase())>-1)
   const userFilteredPics = pics.filter(pic => pic.user === currentUser.name);
   console.log(userFilteredPics);
-  filteredPics.sort(function(a, b){return a.id - b.id});
-  filteredPics.reverse()
   return (
     <BrowserRouter>
       <Routes>
@@ -54,7 +52,7 @@ function App() {
             <>
             <main>
               <ProfileSection currentUser={currentUser} users={users} allPics={pics} setAllPics={setPics} comments={comments} setComments={setComments} filteredPics={userFilteredPics}/>
-              <PostsSection currentUser={currentUser} users={users} pics={filteredPics} setPics={setPics} comments={comments} setComments={setComments}/>
+              <PostsSection setCurrentUser={setCurrentUser} currentUser={currentUser} users={users} pics={filteredPics} setPics={setPics} comments={comments} setComments={setComments}/>
             </main>
             <Footer />
             </>
