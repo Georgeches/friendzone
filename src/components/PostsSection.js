@@ -16,6 +16,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
     
   function handleSubmit(e) {
     e.preventDefault()
+    
     if (!currentPic) return;
 
     const username = currentUser.name; 
@@ -169,7 +170,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                 <div className="modal-header">
                     <form id="comment-form">
                       <input value={commentInput} onChange={(e) => setCommentInput(e.target.value)} type="text" placeholder="Add Comment ..." />
-                      <button type="button" onClick={(e) => handleSubmit(e,pic)}>Send</button>
+                      <button type="button" onClick={(e) => {currentUser.name===undefined? alert("please log in first"): handleSubmit(e,pic)}}>Send</button>
                     </form>
                                         
                 </div>

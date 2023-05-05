@@ -40,11 +40,8 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     };
 
     console.log(newPost);
-    axios.post('https://my-json-server.typicode.com/Georgeches/friendzone/pictures', newPost, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+
+    axios.post('https://my-json-server.typicode.com/Georgeches/friendzone/pictures', newPost)
     .then(function (response) {
       console.log(response);
     })
@@ -63,11 +60,6 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
   }
 
   function handleDelete(id){
-    fetch(`http://localhost:4000/pictures/${id}`, {
-      method: 'DELETE',
-      headers: { 'Content-type': 'application/json' },
-    });
-  
     axios.delete(`https://my-json-server.typicode.com/Georgeches/friendzone/pictures/${id}`, {
       headers: {
         'Authorization': 'Bearer <token>'
