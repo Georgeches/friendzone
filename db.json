@@ -9,7 +9,7 @@
       "user": "George Chesire"
     },
     {
-      "id": 1,
+      "id": 2,
       "comments": [],
       "date": "5th May 2023",
       "image": "https://images.pexels.com/photos/2405039/pexels-photo-2405039.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -17,7 +17,7 @@
       "user": "Terrence Chebii"
     },
     {
-      "id": 1,
+      "id": 3,
       "comments": [],
       "date": "5th May 2023",
       "image": "https://images.pexels.com/photos/1142948/pexels-photo-1142948.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -40,7 +40,7 @@
       "profile_picture": "https://images.pexels.com/photos/16539495/pexels-photo-16539495.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
       "followers": [],
       "following": [],
-      "id": 1
+      "id": 2
     },
     {
       "name": "Yahya Garat",
@@ -48,7 +48,7 @@
       "profile_picture": "https://images.pexels.com/photos/904332/pexels-photo-904332.jpeg?auto=compress&cs=tinysrgb&w=600",
       "followers": [],
       "following": [],
-      "id": 1
+      "id": 3
     }
   ]
 }

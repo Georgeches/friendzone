@@ -49,20 +49,20 @@ function SignUp(props){
             <h2>Welcome to Friendzone.com</h2>
             <div className="auth-form-container">
             <form>
-                <input type="text" placeholder="Enter your username" onChange={e=>setUsername(e.target.value)} />
-                <input type="password" placeholder="Enter your password" onChange={e=>setPassword(e.target.value)} />
+                <input type="text" placeholder="Enter your username" onChange={e=>setUsername(e.target.value)} required/>
+                <input type="password" placeholder="Enter your password" onChange={e=>setPassword(e.target.value)} required/>
                 <label for="file">Enter profile pic</label>
                 <input type="file" class="form-control-file" id="exampleFormControlFile1" onChange={e=>{
                     let value = URL.createObjectURL(e.target.files[0]);
                     setProfilePic(value)
                     console.log(value)
-                    }}/>
+                    }} required/>
                 <p>your profile pic:</p>
                 <img src={profilePic} height="100" alt="profile pic" />
                 <br/>
                 <br/>
                 <button onClick={addNewUser}>Create account</button>
-                <p>Already have an account? <Link style={{color:'#7843E6'}} to="/login">Log in</Link></p>
+                <p style={{color:'black'}}>Already have an account? <Link style={{color:'#7843E6'}} to="/login">Log in</Link></p>
             </form>
             </div>
         </div>
