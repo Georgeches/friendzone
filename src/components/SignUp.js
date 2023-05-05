@@ -51,7 +51,12 @@ function SignUp(props){
             <form>
                 <input type="text" placeholder="Enter your username" onChange={e=>setUsername(e.target.value)} />
                 <input type="password" placeholder="Enter your password" onChange={e=>setPassword(e.target.value)} />
-                <input type="text" placeholder="Enter your profile pic" onChange={e=>setProfilePic(e.target.value)} />
+                <label for="file">Enter profile pic</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" onChange={e=>{
+                    let value = URL.createObjectURL(e.target.files[0]);
+                    setProfilePic(value)
+                    console.log(value)
+                    }}/>
                 <p>your profile pic:</p>
                 <img src={profilePic} height="100" alt="profile pic" />
                 <br/>
