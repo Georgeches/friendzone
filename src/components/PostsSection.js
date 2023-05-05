@@ -6,14 +6,13 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
     let prefferedWidth = (window.screen.width*0.5).toString()+'px'
     const mystyle = {
         height: prefferedHeight,
-        width: prefferedWidth
-    };
+        width: window.screen.width>1000 ? prefferedWidth : (window.screen.width*0.95).toString()+'px'
+      };
     
     const [currentPic, setCurrentPic] = useState(null);
     const [likedPosts, setLikedPosts] = useState([])
     const [commentInput, setCommentInput] = useState('');
 
-    
   function handleSubmit(e) {
     e.preventDefault()
     
@@ -130,6 +129,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                   <p>{pic.date}</p>
                   </div>
                 </div>
+                <div>
                 {
                 currentUser.name===undefined?
                 console.log('not logged in')
@@ -148,6 +148,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                     :
                     <p className="follow-btn" onClick={(e) => handleFollow(e,pic)}>Follow</p>
                 }
+                </div>
               </div>
               <div className="image">
                 <img className="img-responsive" height="300" src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>

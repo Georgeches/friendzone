@@ -295,3 +295,85 @@ main{
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
+
+@media only screen and (max-width: 1000px){
+  .logo{
+    display: none;
+  }
+  .right form{
+    margin-left: 10px;
+  }
+  .profile{
+    display: none;
+    width: 95%;
+  }
+  .posts{
+    width: 95%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .image{
+    width: 100%;
+  }
+  .post-header{
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .post-header .follow-btn{
+    height: 40px;
+    width: 80px;
+    border-radius: 20px;
+    background-color: var(--btn-bg-color);
+    margin-top: 15px;
+    padding-top: 9px;
+    cursor:pointer;
+    margin-left: -80px;
+  }
+  .other-info{
+    display: flex;
+    justify-content: center;
+  }
+  .post-info{
+    margin-right: 20px;
+  }
+  .btns button{
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 90px;
+    border-radius: 20px;
+    background-color: var(--btn-bg-color);
+    color: rgb(47, 47, 47);
+    margin-top: 10px;
+  }
+  .profile-post{
+    width: 100%;
+    min-height: 400px;
+    display: grid;
+    place-content: center;
+  }
+  
+  .profile-post img{
+    width: 100%;
+    text-align: center;
+  }
+  
+  .profile .info{
+    display: flex;
+    justify-content: space-around;
+    color: var(--info-color);
+  }
+  
+  .info button{
+    outline: none;
+    border: none;
+    height: 50px;
+    width: 100px;
+    border-radius: 20px;
+    background-color: var(--btn-bg-color);
+    color: rgb(47, 47, 47);
+    margin: 10px;
+  }
+}

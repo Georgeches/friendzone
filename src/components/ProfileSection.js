@@ -11,7 +11,7 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
 
   const mystyle = {
     height: preferredHeight,
-    width: preferredWidth
+    width: window.screen.width>1000 ? preferredWidth : (window.screen.width*0.95).toString()+'px'
   };
 
   const [postInput, setPostInput] = useState('');

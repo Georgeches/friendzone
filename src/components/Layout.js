@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import Logo from './Logo.png'
+import $ from 'jquery'
 
 function Layout({currentUser, setCurrentUser, search, setSearch}){
     const linkStyle = {
@@ -13,11 +14,27 @@ function Layout({currentUser, setCurrentUser, search, setSearch}){
             setCurrentUser({})
         }
     }
+    function showProfile(e){
+        if(e.target.textContent === 'Profile'){
+            $('.profile').toggle()
+            $('.posts').hide()
+            e.target.textContent = 'Posts'
+        }
+        else{
+            $('.profile').hide()
+            $('.posts').toggle()
+            e.target.textContent = 'Profile'
+        }
+    }
+    function showPosts(){
+        $('.profile').hide()
+        $('.posts').toggle()
+    }
     return (
         <>
         <nav>
             <div className="right">
-               <img src={Logo} alt="logo" height="80" />
+               <img src={Logo} alt="logo" height="80" className="logo" />
                 <form>
                     <input type="text" id="filter" placeholder="Type to search..." onChange={e=>{
                         e.preventDefault() 
@@ -26,7 +43,7 @@ function Layout({currentUser, setCurrentUser, search, setSearch}){
             </div>
         
         <div className="buttons">
-            <Link style={linkStyle} to="/">Home</Link>
+            <Link style={linkStyle} onClick={showPosts} to="/">Home</Link>
             {currentUser.name===undefined ? 
             <>
             <Link style={linkStyle} to="/login">Log in</Link>
@@ -34,6 +51,11 @@ function Layout({currentUser, setCurrentUser, search, setSearch}){
             </>
             :
             <>
+            {window.screen.width<1001?
+            <p style={linkStyle} onClick={showProfile}>Profile</p>
+            :console.log('big')
+            }
+            
             <Link style={linkStyle} onClick={handleLogOut} to="/">Log out</Link>
             </>
             }
