@@ -1,26 +1,22 @@
 import React, {useState , useEffect} from "react";
 
-function PostsSection(){
+function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}){
     let prefferedHeight = (window.screen.height*0.75).toString()+'px'
-    let prefferedWidth = (window.screen.width*0.6).toString()+'px'
+    let prefferedWidth = (window.screen.width*0.5).toString()+'px'
     const mystyle = {
         height: prefferedHeight,
         width: prefferedWidth
     };
     
     const [currentPic, setCurrentPic] = useState(null);
-    const [users , setUsers] = useState([])
-    const [videos , setVideos] = useState([])
-    const [pics , setPics] = useState([])
     const [likedPosts, setLikedPosts] = useState([])
     const [commentInput, setCommentInput] = useState('');
-    const[comments , setComments] = useState([])
 
     
   function handleSubmit() {
     if (!currentPic) return;
 
-    const username = 'w'; 
+    const username = currentUser.name; 
     const newComment = { user: username, comment: commentInput }; 
     setComments([...comments, newComment]);
     setCommentInput('');
@@ -32,29 +28,6 @@ function PostsSection(){
       body: JSON.stringify({ comments: currentPic.comments.concat(newComment) }),
     });
   }
-    
-    
-   
-    
-
-    useEffect(() => {
-        fetch('http://localhost:4000/users')
-        .then(res => res.json())
-        .then(data => setUsers(data))
-        
-    }, [])
-
-      useEffect(() => {
-      fetch('http://localhost:4000/videos')
-      .then(res => res.json())
-      .then(data => setVideos(data))
-    }, [])
-
-    useEffect(() => {
-      fetch('http://localhost:4000/pictures')
-      .then(res => res.json())
-      .then(data => setPics(data))
-    }, [])
 
 
     function handleLikes(pic, likedPosts, setLikedPosts, setPics) {
@@ -80,6 +53,32 @@ function PostsSection(){
         body : JSON.stringify({ likes: pic.likes + 1 })
       })
     }
+
+    function handleFollow(pic) {
+      const userId = users.find(user => user.name === pic.user)?.id;
+      const selectedProfile = users.find(user => user.name === pic.user)
+      if (!userId) return;
+    
+      const alreadyFollowing = pic.user === currentUser.name;
+      if (alreadyFollowing) return;
+    
+      const newFollowername = { user: currentUser.name };
+      const newFollower = [...selectedProfile.followers , newFollowername]
+    
+      fetch(`http://localhost:4000/users/${userId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ followers: newFollower }),
+      })
+        .then((response) => response.json())
+        .then((data) => {console.log(data);
+        })
+        .catch((error) => console.error(error));
+    }
+    
+    
+    
+    
     
     function handleComments(pic) {
       setCurrentPic(pic);
@@ -91,7 +90,7 @@ function PostsSection(){
           {pics.map((pic) => (
             <>
             <section className="post" key={pic.id}>
-              <hr/>
+              
               <div className="post-header">
                 <div className="user-info">
                   {users.filter(user=>pic.user===user.name).map(post=>
@@ -104,7 +103,7 @@ function PostsSection(){
                   <p>{pic.date}</p>
                   </div>
                 </div>
-                <button className="follow-btn">Follow</button>
+                <button className="follow-btn" onClick={() => handleFollow(pic)}>Follow</button>
               </div>
               <div className="image">
                 <img className="img-responsive" height="300" src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>
@@ -119,6 +118,7 @@ function PostsSection(){
                   <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>Like</button>
                 </div>
               </div>
+              <hr/>
             </section>
         <div className="modal fade" id="comments-modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-scrollable" role="document">
