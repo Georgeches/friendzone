@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# FRIENDZONE
+This is a React application that allows users to view posts and profiles, as well as create accounts and log in. The application uses React Router to navigate between different pages, and it fetches data from a local API to display posts and user information.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Technologies used
+React
+axios
 
-## Available Scripts
+# Components
+The application has the following components:
 
-In the project directory, you can run:
+# App.js
+This is the main component of the application that contains the router and all the other components.
 
-### `npm start`
+# ProfileSection.js
+This component displays the user's profile information, such as their name, profile picture, and bio. It also allows the user to edit their profile information.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# PostsSection.js
+This component displays all the posts from all users, as well as the ability to like and comment on posts. It also allows the user to filter posts by user.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# SignUp.js
+This component allows the user to create a new account.
 
-### `npm test`
+# Login.js
+This component allows the user to log in to their account.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# NoPage.js
+This component is displayed when a user navigates to a non-existent page.
 
-### `npm run build`
+# Footer.js
+This component displays the footer of the application.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Layout.js
+This component contains the navigation bar and is used to wrap all the other components.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# App Features
+User Authentication
+When the app loads, the user is not logged in. To log in, click the "Login" button in the top right corner of the screen and enter your username and password. If you do not have an account, click the "Sign Up" button to create one.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Posting Pictures
+Once logged in, users can post pictures by clicking the "Add Post" button in the top right corner of the screen. They will be prompted to enter an image URL, which will be displayed in the app along with the date the picture was posted and the number of likes and comments.
 
-### `npm run eject`
+# Liking Pictures
+Users can like pictures by double-clicking on the picture. This will increase the number of likes and add the user's name to a list of users who have liked the picture. Users can only like a picture once.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Following Users
+Users can follow other users by clicking the "Follow" button on a picture. This will add the user to the list of followers for that user's profile. If the user is already following the profile, the "Following" button will be displayed instead.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Leaving Comments
+Users can leave comments on pictures by entering text into the comment input field below the picture and clicking the "Comment" button. This will add the user's name and comment to the list of comments for the picture. Comments are displayed below the picture along with the user's name and a timestamp.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# How the App Works
+The app is built using React and axios, and uses JSON data stored on a remote server to display pictures, user information, and comments. The app is divided into several components, including:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+App: the main component that handles user authentication and renders the other components
+LoginForm: a component that displays a login form and handles user authentication
+SignUpForm: a component that displays a sign up form and handles user creation
+NavBar: a component that displays the navigation bar and handles user logout
+PostsSection: a component that displays the pictures and handles user interactions, such as liking, following, and commenting on pictures
+The app uses useState and useEffect hooks to manage state and update the UI based on user actions. axios is used to make HTTP requests to the remote server and update the JSON data stored there.
 
-## Learn More
+When a user logs in or signs up, their username and password are stored in the browser's local storage. When the app loads, it checks the local storage to see if a user is already logged in, and displays the appropriate UI based on the user's authentication status.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+When a user posts a picture, the app sends an HTTP request to the remote server to add the picture to the JSON data. When a user likes a picture or leaves a comment, the app sends an HTTP request to the server to update the likes or comments for the picture.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+When a user follows another user, the app sends an HTTP request to the server to update the list of followers for that user's profile. The app checks the list of followers to see if the user is already following the profile, and displays the appropriate UI based on the user's following status.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
