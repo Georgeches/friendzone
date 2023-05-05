@@ -12,7 +12,6 @@ function App() {
   const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   const [pics , setPics] = useState([])
-  const [videos , setVideos] = useState([])
   const [search, setSearch] = useState('')
   const[comments , setComments] = useState([])
 
@@ -20,11 +19,6 @@ function App() {
     fetch('http://localhost:4000/users')
     .then(res => res.json())
     .then(data => setUsers(data))
-  }, [])
-  useEffect(() => {
-    fetch('http://localhost:4000/videos')
-    .then(res => res.json())
-    .then(data => setVideos(data))
   }, [])
   useEffect(() => {
     fetch('http://localhost:4000/pictures')

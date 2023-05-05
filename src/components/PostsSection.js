@@ -54,7 +54,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
       })
     }
 
-    function handleFollow(pic) {
+    function handleFollow(e,pic) {
       const userId = users.find(user => user.name === pic.user)?.id;
       const selectedProfile = users.find(user => user.name === pic.user)
       if (!userId) return;
@@ -74,6 +74,9 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
         .then((data) => {console.log(data);
         })
         .catch((error) => console.error(error));
+      e.target.textContent = 'Following'
+      e.target.style.color = '#7843E6'
+      e.target.classList.remove('follow-btn')
     }
     
     
@@ -103,7 +106,24 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                   <p>{pic.date}</p>
                   </div>
                 </div>
-                <button className="follow-btn" onClick={() => handleFollow(pic)}>Follow</button>
+                {
+                currentUser.name===undefined?
+                console.log('not logged in')
+                :
+                users.find(user=>user.name===pic.user).name===currentUser.name?
+                 console.log('your pic')
+                : 
+                  users.find(user=>user.name===pic.user).followers.length===0?
+                  <p className="follow-btn" onClick={(e) => handleFollow(e,pic)}>Follow</p>
+                  :
+                  
+                  users.find(user=>user.name===pic.user).followers.filter(
+                    follower=>follower.user === currentUser.name
+                  ).length>0?
+                    <p style={{color:'#7843E6'}}>Following</p>
+                    :
+                    <p className="follow-btn" onClick={(e) => handleFollow(e,pic)}>Follow</p>
+                }
               </div>
               <div className="image">
                 <img className="img-responsive" height="300" src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>
