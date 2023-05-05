@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import Layout from './components/Layout';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 function App() {
   const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState({})
@@ -16,15 +18,26 @@ function App() {
   const[comments , setComments] = useState([])
 
   useEffect(() => {
-    fetch('https://my-json-server.typicode.com/Georgeches/friendzone/users')
-    .then(res => res.json())
-    .then(data => setUsers(data))
-  }, [])
+    axios.get('https://my-json-server.typicode.com/Georgeches/friendzone/users')
+      .then((response) => {
+        const data = response.data;
+        setUsers(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  
   useEffect(() => {
-    fetch('https://my-json-server.typicode.com/Georgeches/friendzone/pictures')
-    .then(res => res.json())
-    .then(data => setPics(data))
-  }, [])
+    axios.get('https://my-json-server.typicode.com/Georgeches/friendzone/pictures')
+      .then((response) => {
+        const data = response.data;
+        setPics(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const filteredPics = pics.filter(pic=>pic.user.toLowerCase().search(search.toLocaleLowerCase())>-1)
   const userFilteredPics = pics.filter(pic => pic.user === currentUser.name);
