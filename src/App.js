@@ -16,12 +16,12 @@ function App() {
   const[comments , setComments] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:4000/users')
+    fetch('https://my-json-server.typicode.com/Georgeches/friendzone/users')
     .then(res => res.json())
     .then(data => setUsers(data))
   }, [])
   useEffect(() => {
-    fetch('http://localhost:4000/pictures')
+    fetch('https://my-json-server.typicode.com/Georgeches/friendzone/pictures')
     .then(res => res.json())
     .then(data => setPics(data))
   }, [])

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignUp(props){
     const [username, setUsername] = useState('')
@@ -23,15 +24,18 @@ function SignUp(props){
             alert("username is already taken")
         }
         else{
-            fetch('http://localhost:4000/users',{
-                method:'POST',
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUser)
+            axios.post('https://my-json-server.typicode.com/Georgeches/friendzone/users', newUser, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
             })
-            .then(res=>res.json())
-            .then(newData=>console.log(newData))
+            .then(function (response) {
+            console.log(response.data);
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
+
             props.setUsers([...props.users, newUser])
             alert('Account has been created successfully. You can now log in')
             e.target.form.reset()
