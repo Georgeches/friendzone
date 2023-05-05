@@ -61,3 +61,19 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #f1c40f;
 }
+
+@media only screen and (max-width:1000px) {
+  .auth-form-container{
+    max-width: 90%;
+    overflow-x: hidden; 
+  }
+  body{
+    overflow-x: hidden;
+  }
+  .signup-form h2{
+    font-size: 25px;
+  }
+  .signup-form button{
+    width: 100%;
+  }
+}
