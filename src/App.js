@@ -42,6 +42,8 @@ function App() {
   const filteredPics = pics.filter(pic=>pic.user.toLowerCase().search(search.toLocaleLowerCase())>-1)
   const userFilteredPics = pics.filter(pic => pic.user === currentUser.name);
   console.log(userFilteredPics);
+  filteredPics.sort(function(a, b){return a.id - b.id});
+  filteredPics.reverse()
   return (
     <BrowserRouter>
       <Routes>

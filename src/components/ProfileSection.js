@@ -4,7 +4,7 @@ import axios from 'axios';
 function ProfileSection({filteredPics,currentUser , comments , setComments, allPics, setAllPics}) {
   let preferredHeight = (window.screen.height*0.75).toString()+'px';
   let preferredWidth = (window.screen.width*0.3).toString()+'px';
-  
+
   let fullWidth = {
     width: '90%'
   } 
@@ -19,6 +19,10 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
   const[myPics , setMyPics] = useState([])
   const[deletedPics , setDeletedPics] = useState([])
 
+  filteredPics.sort(function(a, b){return a.id - b.id});
+  filteredPics.reverse()
+  console.log(filteredPics)
+
   function handlePost(e){
     e.preventDefault(); 
     let months = ['January', 'February','March','April','May','June','July','August','September','November','December']
@@ -29,13 +33,18 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     let currentDate = `${day}th ${month} ${year}`
     console.log(currentDate)
 
+    let x = 1
+    for(let i of filteredPics){
+      x++
+    }
 
     let newPost = {
       image: postInput,
       user: currentUser.name,
       date: currentDate,
       likes: 0,
-      comments: []
+      comments: [],
+      id: x
     };
 
     console.log(newPost);
@@ -52,6 +61,7 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     setMyPics([...myPics, newPost])
     alert('Posted')
     setPostInput('')
+    
   }
 
   function handleComments(mypic) {

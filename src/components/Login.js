@@ -1,6 +1,6 @@
 import './login.css';
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 function Login({users, currentUser, setCurrentUser}) {
     const [username, setName] = useState('')
     const [password, setPassword] = useState('')
@@ -44,6 +44,7 @@ function Login({users, currentUser, setCurrentUser}) {
             <input type="password" id="password" name="password" onChange={e=>setPassword(e.target.value)}/>
           </div>
           <button type="submit" onClick={handleLogin}>Log in</button>
+          <p style={{textAlign:'center'}}>Don't have an account? <Link style={{color:'#7843E6'}} to="/signup">Sign Up</Link></p>
         </form>
       </div>
   );
