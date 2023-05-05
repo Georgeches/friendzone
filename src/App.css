@@ -235,14 +235,14 @@ main{
   text-align: center;
 }
 
-.post-header button{
+.post-header .follow-btn{
   height: 50px;
   width: 120px;
   border-radius: 20px;
-  border: none;
-  outline: none;
   background-color: var(--btn-bg-color);
   margin-top: 15px;
+  padding-top: 15px;
+  cursor:pointer;
 }
 
 .post-header button:hover{

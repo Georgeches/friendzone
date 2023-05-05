@@ -5,7 +5,7 @@ function Login({users, currentUser, setCurrentUser}) {
     const [username, setName] = useState('')
     const [password, setPassword] = useState('')
     const nav = useNavigate()
-
+    
     function handleLogin(e){
         e.preventDefault()
         let foundUsers = []
