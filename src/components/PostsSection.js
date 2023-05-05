@@ -1,4 +1,5 @@
 import React, {useState , useEffect} from "react";
+import axios from "axios";
 
 function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}){
     let prefferedHeight = (window.screen.height*0.75).toString()+'px'
@@ -22,10 +23,18 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
     setCommentInput('');
     console.log(username);
 
-    fetch(`http://localhost:4000/pictures/${currentPic.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ comments: currentPic.comments.concat(newComment) }),
+    axios.patch(`https://my-json-server.typicode.com/Georgeches/friendzone/pictures/${currentPic.id}`, { 
+      comments: currentPic.comments.concat(newComment)
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
   }
 
@@ -47,11 +56,19 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
         })
       );
     
-      fetch(`http://localhost:4000/pictures/${pic.id}` , {
-        method : 'PATCH',
-        headers : {'Content-Type' : 'application/json'},
-        body : JSON.stringify({ likes: pic.likes + 1 })
+      axios.patch(`https://my-json-server.typicode.com/Georgeches/friendzone/pictures/${pic.id}`, {
+        likes: pic.likes + 1
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
 
     function handleFollow(e,pic) {
@@ -65,15 +82,19 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
       const newFollowername = { user: currentUser.name };
       const newFollower = [...selectedProfile.followers , newFollowername]
     
-      fetch(`http://localhost:4000/users/${userId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ followers: newFollower }),
+      axios.patch(`https://my-json-server.typicode.com/Georgeches/friendzone/users/${userId}`, {
+        followers: newFollower
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-        .then((response) => response.json())
-        .then((data) => {console.log(data);
-        })
-        .catch((error) => console.error(error));
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
       e.target.textContent = 'Following'
       e.target.style.color = '#7843E6'
       e.target.classList.remove('follow-btn')

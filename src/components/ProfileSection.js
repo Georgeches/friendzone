@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 function ProfileSection({filteredPics,currentUser , comments , setComments, allPics, setAllPics}) {
   let preferredHeight = (window.screen.height*0.75).toString()+'px';
@@ -39,12 +40,18 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
     };
 
     console.log(newPost);
-    
-    fetch('http://localhost:4000/pictures' ,{
-      method : 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body : JSON.stringify(newPost)
+    axios.post('https://my-json-server.typicode.com/Georgeches/friendzone/pictures', newPost, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
+
     setAllPics([...allPics, newPost])
     setMyPics([...myPics, newPost])
     alert('Posted')
@@ -61,6 +68,18 @@ function ProfileSection({filteredPics,currentUser , comments , setComments, allP
       headers: { 'Content-type': 'application/json' },
     });
   
+    axios.delete(`https://my-json-server.typicode.com/Georgeches/friendzone/pictures/${id}`, {
+      headers: {
+        'Authorization': 'Bearer <token>'
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
     let DeletedPics = myPics.filter(mypic => mypic.id !== id)
     setDeletedPics(DeletedPics);
     setMyPics(DeletedPics);
