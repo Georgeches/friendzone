@@ -101,32 +101,39 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
     }
 
     function handleFollow(e,pic) {
-      const userId = users.find(user => user.name === pic.user)?.id;
-      const selectedProfile = users.find(user => user.name === pic.user)
-      if (!userId) return;
-    
-      const alreadyFollowing = pic.user === currentUser.name;
-      if (alreadyFollowing) return;
-    
-      const newFollowername = { user: currentUser.name };
-      const newFollower = [...selectedProfile.followers , newFollowername]
-    
-      axios.patch(`https://my-json-server.typicode.com/Georgeches/friendzone/users/${userId}`, {
-        followers: newFollower
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      e.target.textContent = 'Following'
-      e.target.style.color = '#7843E6'
-      e.target.classList.remove('follow-btn')
+      if(e.target.textContent === 'Following'){
+        e.target.textContent = 'Follow'
+        e.target.classList.add('follow-btn')
+        e.target.style.color = 'black'
+      }
+      else{
+        const userId = users.find(user => user.name === pic.user)?.id;
+        const selectedProfile = users.find(user => user.name === pic.user)
+        if (!userId) return;
+      
+        const alreadyFollowing = pic.user === currentUser.name;
+        if (alreadyFollowing) return;
+      
+        const newFollowername = { user: currentUser.name };
+        const newFollower = [...selectedProfile.followers , newFollowername]
+      
+        axios.patch(`https://my-json-server.typicode.com/Georgeches/friendzone/users/${userId}`, {
+          followers: newFollower
+        }, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        e.target.textContent = 'Following'
+        e.target.style.color = '#7843E6'
+        e.target.classList.remove('follow-btn')
+      }
     }
     
     
@@ -172,7 +179,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                   users.find(user=>user.name===pic.user).followers.filter(
                     follower=>follower.user === currentUser.name
                   ).length>0?
-                    <p style={{color:'#7843E6'}}>Following</p>
+                    <p style={{color:'#7843E6'}} onClick={e=>handleFollow(e,pic)}>Following</p>
                     :
                     <p className="follow-btn" onClick={(e) => handleFollow(e,pic)}>Follow</p>
                 }
