@@ -12,6 +12,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
     const [currentPic, setCurrentPic] = useState(null);
     const [likedPosts, setLikedPosts] = useState([])
     const [commentInput, setCommentInput] = useState('');
+    const [likeOrUnlike, setLike] = useState('Like')
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -42,34 +43,61 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
 
     function handleLikes(pic, likedPosts, setLikedPosts, setPics) {
       if (likedPosts.includes(pic.id)) {
-        alert('You already Liked')
-        return; 
+        // Update likedPosts and the likes count for the post
+        setLikedPosts(likedPosts.filter((id) => id !== pic.id));
+        setPics((prevPics) =>
+          prevPics.map((p) => {
+            if (p.id === pic.id) {
+              return { ...p, likes: p.likes - 1 };
+            }
+            return p;
+          })
+          
+        );
+      
+        axios.patch(`https://my-json-server.typicode.com/Georgeches/friendzone/pictures/${pic.id}`, {
+          likes: pic.likes - 1
+        }, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        setLike('Like')
       }
       
-      // Update likedPosts and the likes count for the post
-      setLikedPosts([...likedPosts, pic.id]);
-      setPics((prevPics) =>
-        prevPics.map((p) => {
-          if (p.id === pic.id) {
-            return { ...p, likes: p.likes + 1 };
+      else{
+        // Update likedPosts and the likes count for the post
+        setLikedPosts([...likedPosts, pic.id]);
+        setPics((prevPics) =>
+          prevPics.map((p) => {
+            if (p.id === pic.id) {
+              return { ...p, likes: p.likes + 1 };
+            }
+            return p;
+          })
+        );
+      
+        axios.patch(`https://my-json-server.typicode.com/Georgeches/friendzone/pictures/${pic.id}`, {
+          likes: pic.likes + 1
+        }, {
+          headers: {
+            'Content-Type': 'application/json'
           }
-          return p;
         })
-      );
-    
-      axios.patch(`https://my-json-server.typicode.com/Georgeches/friendzone/pictures/${pic.id}`, {
-        likes: pic.likes + 1
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        setLike('Unlike')
+      }
     }
 
     function handleFollow(e,pic) {
@@ -160,7 +188,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                 </div>
                 <div className="btns">
                   <button onClick={(e) => handleComments(e, pic)} data-toggle="modal" data-target="#comments-modal" className="comment-btn">Comment</button>
-                  <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>Like</button>
+                  <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>{likeOrUnlike}</button>
                 </div>
               </div>
               <hr/>
