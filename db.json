@@ -1,23 +1,20 @@
 {
   "pictures": [
-    
+    {
+      "id": 1,
+      "comments": [],
+      "date": "5th May 2023",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9bKvNbfTt0Xl2tvmcNxV-WUvRd0CkEOVaDg",
+      "likes": 0,
+      "user": "George Chesire"
+    }
   ],
   "users": [
     {
       "name": "George Chesire",
       "password": "georgechesire",
       "profile_picture": "https://doitbeforeme.com/wp-content/uploads/2023/01/Naruto-Wallpaper-hd.webp",
-      "followers": [
-        {
-          "user": "Treasure Jeruto"
-        },
-        {
-          "user": "Elon Musk"
-        },
-        {
-          "user": "Terrence Chebii"
-        }
-      ],
+      "followers": [],
       "following": [],
       "id": 1
     }

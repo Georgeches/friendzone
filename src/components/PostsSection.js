@@ -14,7 +14,8 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
     const [commentInput, setCommentInput] = useState('');
 
     
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault()
     if (!currentPic) return;
 
     const username = currentUser.name; 
@@ -104,7 +105,8 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
     
     
     
-    function handleComments(pic) {
+    function handleComments(e, pic) {
+      e.preventDefault()
       setCurrentPic(pic);
       setComments(pic.comments);
     }
@@ -155,7 +157,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                   <p>{pic.comments.length} comments</p>
                 </div>
                 <div className="btns">
-                  <button onClick={() => handleComments(pic)} data-toggle="modal" data-target="#comments-modal" className="comment-btn">Comment</button>
+                  <button onClick={(e) => handleComments(e, pic)} data-toggle="modal" data-target="#comments-modal" className="comment-btn">Comment</button>
                   <button onClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}>Like</button>
                 </div>
               </div>
@@ -167,7 +169,7 @@ function PostsSection({currentUser, users, pics, setPics ,comments ,setComments}
                 <div className="modal-header">
                     <form id="comment-form">
                       <input value={commentInput} onChange={(e) => setCommentInput(e.target.value)} type="text" placeholder="Add Comment ..." />
-                      <button type="button" onClick={() => handleSubmit(pic)}>Send</button>
+                      <button type="button" onClick={(e) => handleSubmit(e,pic)}>Send</button>
                     </form>
                                         
                 </div>
