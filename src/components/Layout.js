@@ -57,6 +57,7 @@ function Layout({currentUser, setCurrentUser, search, setSearch}){
             }
             
             <Link style={linkStyle} onClick={handleLogOut} to="/">Log out</Link>
+
             </>
             }
         </div>
