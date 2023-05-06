@@ -184,9 +184,7 @@ function PostsSection({setCurrentUser, currentUser, users, pics, setPics ,commen
                 }
                 </div>
               </div>
-              <div className="image">
-                <img className="img-responsive" height="300" src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>
-              </div>
+              <img src={pic.image} alt='pic' onDoubleClick={() => handleLikes(pic, likedPosts, setLikedPosts, setPics)}/>
               <div className="other-info">
                 <div className="post-info">  
                   <p>{pic.likes} likes</p>

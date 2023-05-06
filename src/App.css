@@ -205,14 +205,20 @@ main{
 .posts{
   background-color: var(--section-bg-color);
   overflow: scroll;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .post{
-  width: 600px;
-  border-radius: 5px;
+  width: 80%;
+  min-height: 500px;
   text-align: center;
+}
+
+.post img{
+  width: 100%;
+  
 }
 
 .post-header{
@@ -237,7 +243,6 @@ main{
 }
 
 .post-header img{
-  max-height: 100px;
   max-width: 70px;
   width: inherit;
 }
@@ -324,17 +329,19 @@ main{
     width: 95%;
   }
   .posts{
-    width: 95%;
     overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
   }
-  .image{
+  .post{
     width: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .post-header{
     display: flex;
-    justify-content: space-evenly;
+    width: 100%;
+    justify-content: space-between;
   }
 
   .post-header .follow-btn{
@@ -345,7 +352,6 @@ main{
     margin-top: 15px;
     padding-top: 9px;
     cursor:pointer;
-    margin-left: -80px;
   }
   .other-info{
     display: flex;
