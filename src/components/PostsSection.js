@@ -6,7 +6,7 @@ function PostsSection({setCurrentUser, currentUser, users, pics, setPics ,commen
     let prefferedWidth = (window.screen.width*0.5).toString()+'px'
     const mystyle = {
         height: prefferedHeight,
-        width: window.screen.width>1000 ? prefferedWidth : (window.screen.width*0.95).toString()+'px'
+        width: window.screen.width>1000 ? prefferedWidth : (window.screen.width*1).toString()+'px'
       };
     
     const [currentPic, setCurrentPic] = useState(null);
