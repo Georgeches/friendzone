@@ -45,28 +45,24 @@ function App() {
   const userFilteredPics = pics.filter(pic => pic.user === currentUser.name);
   console.log(userFilteredPics);
 
-  function lightDark(e){
-    e.preventDefault()
-    if(mode === 'Light'){
-      $('body').css('background-color','rgb(12, 12, 12)')
-      $('.posts').css('background-color','rgb(12, 12, 12)')
-      $('.profile').css('background-color','rgb(12, 12, 12)')
-      $('nav').css('background-color','rgb(12, 12, 12)')
-      $('#filter').css('background-color','#606060')
-      e.target.style.color = 'rgb(183, 183, 183)'
-      setMode('Dark')
-    }
-    else{
-      $('body').css('background-color','white')
-      $('body').css('background-color','white')
-      $('.posts').css('background-color','white')
-      $('.profile').css('background-color','white')
-      $('nav').css('background-color','white')
-      $('#filter').css('background-color','#f1f1f1')
-      e.target.style.color = 'rgb(12, 12, 12)'
-      setMode('Light')
-    }
+  if(mode === 'Dark'){
+    $('body').css('background-color','rgb(12, 12, 12)')
+    $('.posts').css('background-color','rgb(12, 12, 12)')
+    $('.profile').css('background-color','rgb(12, 12, 12)')
+    $('nav').css('background-color','rgb(12, 12, 12)')
+    $('#filter').css('background-color','#606060')
+    $('.light-dark').css('color','rgb(183, 183, 183)')
   }
+  else{
+    $('body').css('background-color','white')
+    $('body').css('background-color','white')
+    $('.posts').css('background-color','white')
+    $('.profile').css('background-color','white')
+    $('nav').css('background-color','white')
+    $('#filter').css('background-color','#f1f1f1')
+    $('.light-dark').css('color','rgb(12, 12, 12)')
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -75,7 +71,7 @@ function App() {
         }>
           <Route index element={
             <>
-            <button onClick={e=>lightDark(e)} className="light-dark" style={{
+            <button onClick={()=>{mode==='Light'?setMode('Dark'):setMode('Light')}} className="light-dark" style={{
               border: 'none',
               outline: 'none',
               color: 'rgb(183, 183, 183)',
